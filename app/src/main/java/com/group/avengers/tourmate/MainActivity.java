@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
+import com.group.avengers.tourmate.Fragments.NearByplace;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener
@@ -160,7 +161,10 @@ public class MainActivity extends AppCompatActivity implements
         } else if (id == R.id.nav_myactivity)
         {
 
-        } else if (id == R.id.nav_settings)
+        }else if (id==R.id.nav_nearbyPlace){
+            gotoNearbyPlaceList();
+        }
+        else if (id == R.id.nav_settings)
         {
 
         } else if (id == R.id.nav_share)
@@ -181,24 +185,13 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private void gotoNearbyPlaceList() {
+        ft=fm.beginTransaction();
+        NearByplace nearByplace=new NearByplace();
+        ft.replace(R.id.fragmentContainer,nearByplace);
+        ft.addToBackStack("goto Nearby Place Section");
+        ft.commit();
+    }
 
 
     @Override
