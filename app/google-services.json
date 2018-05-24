@@ -1,79 +1,39 @@
 {
   "project_info": {
-    "project_number": "811751402402",
-    "firebase_url": "https://androidtestdb-b0ea6.firebaseio.com",
-    "project_id": "androidtestdb-b0ea6",
-    "storage_bucket": "androidtestdb-b0ea6.appspot.com"
+    "project_number": "353612297612",
+    "firebase_url": "https://tourmate-e9eb0.firebaseio.com",
+    "project_id": "tourmate-e9eb0",
+    "storage_bucket": "tourmate-e9eb0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:811751402402:android:79ce2eeecc93709c",
-        "android_client_info": {
-          "package_name": "com.airamsoft.aqibmehedi.firebaseexample"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "811751402402-gqr8i3udek3j7nf3d1hcrgieo8r26j83.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.airamsoft.aqibmehedi.firebaseexample",
-            "certificate_hash": "d5d65b4f9b6b1610ea3ca82e51b58ebe27f2cd8c"
-          }
-        },
-        {
-          "client_id": "811751402402-voj1pnqpmmallp5veiq9s1hek8jap7li.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAwN7wC2uZF5fcuCnpK80BXRU0kH1tUi_8"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "811751402402-voj1pnqpmmallp5veiq9s1hek8jap7li.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:811751402402:android:0f388f9505d3f64d",
+        "mobilesdk_app_id": "1:353612297612:android:0f388f9505d3f64d",
         "android_client_info": {
           "package_name": "com.group.avengers.tourmate"
         }
       },
       "oauth_client": [
         {
-          "client_id": "811751402402-2tci5eg3e7lm30pp86j5r07pn70bh65q.apps.googleusercontent.com",
+          "client_id": "353612297612-3860kfg88h63cvo3ip7t9qqh61b9vdsm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.group.avengers.tourmate",
-            "certificate_hash": "904b67bd7bc968ec7555ba0c26f2424afce4ecab"
+            "certificate_hash": "d5d65b4f9b6b1610ea3ca82e51b58ebe27f2cd8c"
           }
         },
         {
-          "client_id": "811751402402-voj1pnqpmmallp5veiq9s1hek8jap7li.apps.googleusercontent.com",
+          "client_id": "353612297612-8j5sra3nlppb8r346q0tvi4ipdhbulbr.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "353612297612-8j5sra3nlppb8r346q0tvi4ipdhbulbr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAwN7wC2uZF5fcuCnpK80BXRU0kH1tUi_8"
+          "current_key": "AIzaSyA1cfdHZ7rmkDEHGH9VlmCaDD66cKaVF_Q"
         }
       ],
       "services": {
@@ -84,7 +44,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "811751402402-voj1pnqpmmallp5veiq9s1hek8jap7li.apps.googleusercontent.com",
+              "client_id": "353612297612-8j5sra3nlppb8r346q0tvi4ipdhbulbr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
