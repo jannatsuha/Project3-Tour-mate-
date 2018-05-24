@@ -73,6 +73,9 @@ public class Signup extends AppCompatActivity {
                     etpassword2.setError(getText(R.string.error_common));
 
                 // Jannat check the method why it is not registering user.
+                    // now check koren , akn tik ase
+                    // apni email change korsilen kintu data base create+ connect konotai kora hoyni
+                    //akn edit kore disi dekhen
                 } else if (password2.equals(passwords)) {
                     firebaseAuth.createUserWithEmailAndPassword(emails, passwords).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "353612297612-meoutcqhuig3b3tgfn31d93a3vuvleqs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group.avengers.tourmate",
+            "certificate_hash": "b6d4c5df0cf449dc3bc7758a5e35cd813b861374"
+          }
+        },
+        {
           "client_id": "353612297612-3860kfg88h63cvo3ip7t9qqh61b9vdsm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -33,7 +41,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA1cfdHZ7rmkDEHGH9VlmCaDD66cKaVF_Q"
+          "current_key": "AIzaSyBUzmGGM4-4YvPQQd3w-EL8Vwb2QFnR5do"
         }
       ],
       "services": {
