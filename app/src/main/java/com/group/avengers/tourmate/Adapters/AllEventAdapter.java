@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -53,27 +54,29 @@ public class AllEventAdapter extends RecyclerView.Adapter<AllEventAdapter.Viewho
 
         model = eventList.get(position);
         holder.tourNameTV.setText(model.getEventName());
-        holder.createdDateTV.setText("Created On: "+model.getCreatedDate());
-        holder.startDateTV.setText("Starts at: "+model.getDeparatureDate());
         String daysLeft = getDaysLeft ();
 
         //---------------------------------------- Date To Days ------------------------------------
-        String string1 = model.getDeparatureDate();
-        String string2 = model.getCreatedDate();
-        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-        try {
-            date1 = sdf.parse(string1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            date2 = sdf.parse(string2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long millis = date1.getTime()-date2.getTime();
-        long days =  (millis / (60*60*24*1000)) % 365;
+        long currentDateMillis = Long.parseLong(model.getCreatedDate());
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTimeInMillis(currentDateMillis);
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat1.setTimeZone(calendar1.getTimeZone());
+        holder.createdDateTV.setText("Created On: "+dateFormat1.format(calendar1.getTime()));
+
         //------------------------------------------------------------------------------------------
+        long startDateMillis = Long.parseLong(model.getDeparatureDate());
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTimeInMillis(startDateMillis);
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat2.setTimeZone(calendar2.getTimeZone());
+        holder.startDateTV.setText("Starts at: "+dateFormat2.format(calendar2.getTime()));
+        //------------------------------------------------------------------------------------------
+
+        long days = ((startDateMillis - currentDateMillis)/ (60*60*24*1000)) % 365;
+
+
+
         holder.daysLeftTV.setText(days+" Days Left");
 
     }
