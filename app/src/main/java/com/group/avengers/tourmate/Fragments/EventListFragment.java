@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -56,7 +57,7 @@ public class EventListFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mEventRecyclerView.setLayoutManager(llm);
 
-
+        Toast.makeText(getActivity(), "Hello every I am here", Toast.LENGTH_SHORT).show();
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("eventlist");
 
