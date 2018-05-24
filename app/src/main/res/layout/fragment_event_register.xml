@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.EventRegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/tourNameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Tour Name" />
+
+        <EditText
+            android:id="@+id/tourLocationET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Your Starting Location"/>
+
+        <EditText
+            android:id="@+id/tourDestinationET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Your Destination"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tourDeparatureDateET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:hint="Deparature Date"/>
+            <Button
+                android:id="@+id/datePickerButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Pick Date"/>
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/tourBudgetET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Your Estimated Budgets"/>
+
+        <Button
+            android:id="@+id/createEventButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Event"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>
