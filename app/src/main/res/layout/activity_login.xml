@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#efe9d3"
     android:layout_height="match_parent"
     tools:context=".Login">
 
@@ -12,7 +13,7 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/logo222" />
+        app:srcCompat="@drawable/logo1111" />
 
     <TextView
         android:textSize="35sp"
@@ -58,6 +59,7 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="log in"
+        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -79,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:background="@color/colorPrimary"
         android:onClick="signUp"
         android:id="@+id/btnSignup"
         android:textColor="#000"

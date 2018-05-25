@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#efe9d3"
     android:layout_height="match_parent"
     tools:context=".Signup">
 
@@ -76,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Register"
+        android:background="@color/colorPrimary"
         android:layout_marginTop="15dp"
         />
 
