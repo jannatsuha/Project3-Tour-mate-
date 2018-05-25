@@ -110,7 +110,6 @@ public class EventRegisterFragment extends Fragment {
             public void onClick(View view) {
 
                 eventID = mFirebaseDatabase.push().getKey();
-
                 String name = mTourName.getText().toString();
                 String location = mTourLocation.getText().toString();
                 String destination = mTourDesination.getText().toString();
