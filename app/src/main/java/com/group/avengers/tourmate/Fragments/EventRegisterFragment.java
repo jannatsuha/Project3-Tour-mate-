@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.group.avengers.tourmate.Models.Event;
 import com.group.avengers.tourmate.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -116,13 +117,20 @@ public class EventRegisterFragment extends Fragment {
                 String deparaturedate = mTourDeparatureDate.getText().toString();
                 String budget = mTourBudget.getText().toString();
 
-                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat deparatureDate = new SimpleDateFormat("dd/MM/yyyy");
                 Date todayDate = new Date();
-                String thisDate = currentDate.format(todayDate);
-                //long currentDayMillis = todayDate.getTime();
-                Event event = new Event(eventID,name,location,destination,thisDate,deparaturedate,budget);
 
-                Toast.makeText(getActivity(),  thisDate, Toast.LENGTH_SHORT).show();
+                Date startDate = new Date();
+                try {
+                    startDate = deparatureDate.parse(deparaturedate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                deparaturedate = Long.toString(startDate.getTime());
+                long currentDayMillis = todayDate.getTime();
+                String thisDate = Long.toString(currentDayMillis);
+                Event event = new Event(eventID,name,location,destination,thisDate,deparaturedate,budget);
                 createNewEvent (event);
             }
 
