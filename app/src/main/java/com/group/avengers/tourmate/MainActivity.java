@@ -3,7 +3,6 @@ package com.group.avengers.tourmate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,7 +16,6 @@ import android.widget.FrameLayout;
 
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
-import com.group.avengers.tourmate.Fragments.NearByplace;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener
@@ -28,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements
     private android.support.v4.app.FragmentManager fm;
     private android.support.v4.app.FragmentTransaction ft;
     private FrameLayout fragmentContainer;
+
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
 
         //------------------------------------------------------------------------------------------
-
-
-
 
 
 
@@ -186,11 +183,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void gotoNearbyPlaceList() {
-        ft=fm.beginTransaction();
-        NearByplace nearByplace=new NearByplace();
-        ft.replace(R.id.fragmentContainer,nearByplace);
-        ft.addToBackStack("goto Nearby Place Section");
-        ft.commit();
+        startActivity(new Intent(MainActivity.this,NearbyPlace.class));
     }
 
 
@@ -213,13 +206,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     //----------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
 
 
 }
