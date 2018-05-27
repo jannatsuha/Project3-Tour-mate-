@@ -15,14 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
+import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
 import com.group.avengers.tourmate.Fragments.NearByplace;
+import com.group.avengers.tourmate.Models.Event;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener
         ,EventRegisterFragment.TourRegistrationInterface
-        ,EventListFragment.EventListInterface{
+        ,EventListFragment.EventListInterface
+        ,EventDetailFragment.EventDetailInterface
+        ,AddMoreBudgetFragment.AddMoreBudgetInterface{
 
 
     private android.support.v4.app.FragmentManager fm;
@@ -211,6 +216,47 @@ public class MainActivity extends AppCompatActivity implements
         ft.addToBackStack("goToEventList");
         ft.commit();
     }
+
+    @Override
+    public void goToEventDetail(Event event) {
+        Bundle bundle = new Bundle();
+        bundle.putString("eventName",event.getEventName());
+        bundle.putString("budget",event.getBudget());
+        bundle.putString("destination",event.getDestination());
+        bundle.putString("location",event.getLocation());
+        bundle.putString("departureDate",event.getDeparatureDate());
+        bundle.putString("id",event.getId());
+        bundle.putString("createdDate",event.getCreatedDate());
+
+
+
+        ft = fm.beginTransaction();
+        EventDetailFragment eventDetailFragment = new EventDetailFragment();
+        eventDetailFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer, eventDetailFragment);
+        ft.addToBackStack("goToEventDetail");
+        ft.commit();
+    }
+
+    @Override
+    public void gotoAddMoreBudget(Event event) {
+        Bundle bundle = new Bundle();
+        bundle.putString("eventName",event.getEventName());
+        bundle.putString("budget",event.getBudget());
+        bundle.putString("destination",event.getDestination());
+        bundle.putString("location",event.getLocation());
+        bundle.putString("departureDate",event.getDeparatureDate());
+        bundle.putString("id",event.getId());
+        bundle.putString("createdDate",event.getCreatedDate());
+
+        ft = fm.beginTransaction();
+        AddMoreBudgetFragment addMoreBudgetFragment1 = new AddMoreBudgetFragment();
+        addMoreBudgetFragment1.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer, addMoreBudgetFragment1);
+        ft.addToBackStack("gotoAddMoreBudget");
+        ft.commit();
+    }
+
 
     //----------------------------------------------------------------------------------------------
 

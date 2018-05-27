@@ -13,23 +13,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
+import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.R;
 import com.group.avengers.tourmate.Models.Event;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class AllEventAdapter extends RecyclerView.Adapter<AllEventAdapter.Viewholder> {
 
     public static FirebaseDatabase firebaseDatabase;
     public static  DatabaseReference databaseReference;
+    private EventDetailFragment.EventDetailInterface eventDetailInterface;
+    private AddMoreBudgetFragment.AddMoreBudgetInterface addMoreBudgetInterface;
     Date date1,date2;
+   // DetailsEventFragment eventFragment;
     public static List<Event> eventList;
     private Event model;
     private Context context;
@@ -45,7 +46,8 @@ public class AllEventAdapter extends RecyclerView.Adapter<AllEventAdapter.Viewho
     @Override
     public Viewholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_model, parent, false);
-
+        eventDetailInterface = (EventDetailFragment.EventDetailInterface) context;
+        addMoreBudgetInterface = (AddMoreBudgetFragment.AddMoreBudgetInterface) context;
         return new Viewholder(itemView);
     }
 
@@ -105,7 +107,12 @@ public class AllEventAdapter extends RecyclerView.Adapter<AllEventAdapter.Viewho
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(itemView.getContext(), eventList.get(getAdapterPosition()).getEventName(), Toast.LENGTH_SHORT).show();
+                    eventDetailInterface.goToEventDetail(eventList.get(getAdapterPosition()));
+                    /*Toast.makeText(itemView.getContext(), eventList.get(getAdapterPosition()).getEventName(), Toast.LENGTH_SHORT).show();
+                    String evName= eventList.get(getAdapterPosition()).getId();
+                    Intent intent= new Intent(context, EventDetailsActivity.class);
+                    intent.putExtra("EventName", evName);
+                    context.startActivity(intent);*/
                 }
             });
 

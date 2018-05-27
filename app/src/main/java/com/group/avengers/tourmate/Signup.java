@@ -83,7 +83,7 @@ public class Signup extends AppCompatActivity {
                             if (task.isSuccessful()) {
 
                                 String key= databaseReference.push().getKey();
-                                UserData userData= new UserData(name,emails,phone);
+                                UserData userData= new UserData(name,key,emails,phone);
                                 databaseReference.child(key).setValue(userData);
 
                                 Toast.makeText(Signup.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
