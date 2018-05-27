@@ -19,7 +19,6 @@ import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
 import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
-import com.group.avengers.tourmate.Fragments.NearByplace;
 import com.group.avengers.tourmate.Models.Event;
 
 public class MainActivity extends AppCompatActivity implements
@@ -166,9 +165,10 @@ public class MainActivity extends AppCompatActivity implements
         } else if (id == R.id.nav_myactivity)
         {
 
-        }else if (id==R.id.nav_nearbyPlace){
-            gotoNearbyPlaceList();
         }
+//        else if (id==R.id.nav_nearbyPlace){
+//            gotoNearbyPlaceList();
+//        }
         else if (id == R.id.nav_settings)
         {
 
@@ -190,13 +190,13 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
-    private void gotoNearbyPlaceList() {
-        ft=fm.beginTransaction();
-        NearByplace nearByplace=new NearByplace();
-        ft.replace(R.id.fragmentContainer,nearByplace);
-        ft.addToBackStack("goto Nearby Place Section");
-        ft.commit();
-    }
+//    private void gotoNearbyPlaceList() {
+//        ft=fm.beginTransaction();
+//        NearByplace nearByplace=new NearByplace();
+//        ft.replace(R.id.fragmentContainer,nearByplace);
+//        ft.addToBackStack("goto Nearby Place Section");
+//        ft.commit();
+//    }
 
 
     @Override
