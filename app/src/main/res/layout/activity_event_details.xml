@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".EventDetailsActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/enentNameShow"
+                android:textSize="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Name"
+                android:background="#ffd6a9"
+                android:textColor="#000000"
+                android:textAlignment="center"
+                android:textStyle="bold"
+
+                />
+            <TextView
+                android:textSize="15sp"
+                android:text="Expense Status"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:layout_marginHorizontal="30dp"
+                android:progress="0" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/bud1"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="/"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/bud2"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="25sp"
+                android:text="Expenditure"
+                android:textAlignment="center"
+                android:background="#ffd6a9"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/addNewExpense"
+                android:textSize="20sp"
+                android:text="Add New Expense"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/viewAllExpense"
+                android:textSize="20sp"
+                android:text="View All Expense"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/addMoreBudget"
+                android:textSize="20sp"
+                android:text="Add More Budget"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="25sp"
+                android:text="Moments"
+                android:background="#ffd6a9"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/takePhoto"
+                android:textSize="20sp"
+                android:text="Take Photo"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/viewGallery"
+                android:textSize="20sp"
+                android:text="View Gallery"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/viewAllMoments"
+                android:textSize="20sp"
+                android:text="View All Moments"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="25sp"
+                android:text="More On Event"
+                android:textAlignment="center"
+                android:background="#ffd6a9"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/editEvent"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:text="Edit Event"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/deleteEvent"
+                android:textSize="20sp"
+                android:text="Delete Event"
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>
