@@ -33,11 +33,14 @@ public class AddnewExpenseFragment extends Fragment {
     private  EditText etAmount1,etComment1;
     private  Button btnAdd;
     private String totalExpense, ids;
-    int expOld;
-    String expOld1;
+    private  int expOld;
+    private String expOld1;
+    private  String totalExpFinal;
     private EventDetailFragment.EventDetailInterface eventDetailInterface;
     private DatabaseReference databaseReference;
-    FirebaseDatabase firebaseDatabase;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference1;
+    private FirebaseDatabase firebaseDatabase1;
 
 
     public interface AddnewExpenseInterface {
@@ -64,12 +67,16 @@ public class AddnewExpenseFragment extends Fragment {
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("Expense");
 
+        return view;
+    }
 
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-       final  String date = df.format(Calendar.getInstance().getTime());
-
-
-
+        final  String date = df.format(Calendar.getInstance().getTime());
         if (getArguments()!=null) {
 
 
@@ -97,18 +104,19 @@ public class AddnewExpenseFragment extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids)
                             .child("expense").child(key).setValue(expense);
 
-
-
-
-                    firebaseDatabase = FirebaseDatabase.getInstance();
-                    databaseReference= firebaseDatabase.getReference("eventlist");
-                    databaseReference.addValueEventListener(new ValueEventListener() {
+                    firebaseDatabase1 = FirebaseDatabase.getInstance();
+                    databaseReference1= firebaseDatabase1.getReference("eventlist").child(ids).child("totalExpense");
+                    databaseReference1.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            expOld1= dataSnapshot.child(ids).child("totalExpense").getValue(String.class);
-                            Toast.makeText(getActivity(), expOld1+"", Toast.LENGTH_SHORT).show();
+                            expOld1= dataSnapshot.getValue(String.class);
 
+                            expOld= Integer.parseInt(expOld1);
+                            Toast.makeText(getActivity(), "total expense  "+expOld, Toast.LENGTH_SHORT).show();
+
+                            int totalExpenseInt= (expNew+expOld);
+                            totalExpFinal= String.valueOf(totalExpenseInt);
                         }
 
                         @Override
@@ -117,16 +125,7 @@ public class AddnewExpenseFragment extends Fragment {
                         }
                     });
 
-
-
-//                    expOld= Integer.parseInt(expOld1);
-//                    int totalExpenseInt= expOld +expNew;
-//                    String totalExpFinal= String.valueOf(totalExpenseInt);
-
-                    HashMap<String, Object> totalExp = new HashMap<>();
-                    totalExp.put("totalExpense", expense.getAmount());
-                    FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).updateChildren(totalExp);
-
+                    Toast.makeText(getActivity(), "total expense  "+totalExpFinal, Toast.LENGTH_SHORT).show();
 
 
                     Event event= new Event(ids,names,locations,destinations,createdDates,departDates,budgets);
@@ -140,12 +139,15 @@ public class AddnewExpenseFragment extends Fragment {
         }
 
 
-        return view;
+
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onStop() {
 
+        HashMap<String, Object> totalExp = new HashMap<>();
+        totalExp.put("totalExpense", totalExpFinal);
+        FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).updateChildren(totalExp);
+        super.onStop();
     }
-}
+    }
