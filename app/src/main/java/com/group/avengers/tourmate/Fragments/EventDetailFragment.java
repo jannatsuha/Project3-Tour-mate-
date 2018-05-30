@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group.avengers.tourmate.Classes.CameraContainer;
 import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.MainActivity;
 import com.group.avengers.tourmate.Models.Event;
@@ -42,6 +43,7 @@ public class EventDetailFragment extends Fragment {
     private AddMoreBudgetFragment.AddMoreBudgetInterface addMoreBudgetInterface;
     private AddnewExpenseFragment.AddnewExpenseInterface addnewExpenseInterface;
     private ExpenseListShow.ExpenseListInterface expenseListInterface;
+    private TakeAphotoFragment.TakeaPhotoInterface takeaPhotoInterface;
     private Event modelEvent;
 
     public interface EventDetailInterface {
@@ -51,7 +53,6 @@ public class EventDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,9 +61,14 @@ public class EventDetailFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.activity_event_details, container, false);
 
+        // initialize all event interface
         addMoreBudgetInterface = (AddMoreBudgetFragment.AddMoreBudgetInterface) getActivity();
         addnewExpenseInterface= (AddnewExpenseFragment.AddnewExpenseInterface) getActivity();
         expenseListInterface= (ExpenseListShow.ExpenseListInterface) getActivity();
+        takeaPhotoInterface= (TakeAphotoFragment.TakeaPhotoInterface) getActivity();
+
+
+
         eventNameShow=view.findViewById(R.id.enentNameShow);
         addExpence=view.findViewById(R.id.addNewExpense);
         viewExpense=view.findViewById(R.id.viewAllExpense);
@@ -76,6 +82,12 @@ public class EventDetailFragment extends Fragment {
         budSts1=view.findViewById(R.id.bud1);
         budSta2=view.findViewById(R.id.bud2);
         ids=(getArguments().getString("id"));
+
+
+
+
+
+
 
         if (getArguments()!=null)
         {
@@ -91,6 +103,23 @@ public class EventDetailFragment extends Fragment {
             final String locations=(getArguments().getString("location"));
             final String createdDates=(getArguments().getString("createdDate"));
             //final String expAmounts=(getArguments().getString("expense"));
+
+
+
+
+            // get camera argument
+
+            String imagename=getArguments().getString("imageName");
+            String imageUrl=getArguments().getString("imageUrl");
+            String currentDateAndTime=getArguments().getString("imageDateTime");
+            String id=getArguments().getString("id");
+
+            final CameraContainer cameraContainer=new CameraContainer(id,imagename,imageUrl,currentDateAndTime);
+
+
+
+
+
 
             eventNameShow.setText(names);
             budSta2.setText(budgets);
@@ -128,6 +157,13 @@ public class EventDetailFragment extends Fragment {
 
                     expenseListInterface.goToExpenseList(event );
 
+                }
+            });
+
+            takePhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    takeaPhotoInterface.gotoimage(cameraContainer);
                 }
             });
 

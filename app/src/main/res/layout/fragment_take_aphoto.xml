@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.TakeAphotoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Firebase Image Upload Tutorial"
+        android:id="@+id/textview"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:id="@+id/imageViewcameraDisplay"
+        android:layout_below="@+id/textview"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnChooseOpenCmera"
+        android:layout_below="@+id/imageViewcameraDisplay"
+        android:layout_marginTop="20dp"
+        android:text="Open Camera"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtimageName"
+        android:layout_below="@+id/btnChooseOpenCmera"
+        android:layout_marginTop="20dp"
+        android:hint="Enter Image Name Here"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btnUploadImage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtimageName"
+        android:layout_marginTop="20dp"
+        android:text="Upload image to Firebase Storage" />
+
+</LinearLayout>

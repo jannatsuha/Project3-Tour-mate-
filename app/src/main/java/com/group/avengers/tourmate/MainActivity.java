@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.group.avengers.tourmate.Classes.CameraContainer;
 import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
 import com.group.avengers.tourmate.Fragments.AddnewExpenseFragment;
@@ -22,6 +23,7 @@ import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
 import com.group.avengers.tourmate.Fragments.ExpenseListShow;
+import com.group.avengers.tourmate.Fragments.TakeAphotoFragment;
 import com.group.avengers.tourmate.Models.Event;
 
 public class MainActivity extends AppCompatActivity implements
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements
         ,AddMoreBudgetFragment.AddMoreBudgetInterface
         ,AddnewExpenseFragment.AddnewExpenseInterface
         ,ExpenseListShow.ExpenseListInterface
+        ,TakeAphotoFragment.TakeaPhotoInterface
         {
 
 
@@ -265,6 +268,24 @@ public class MainActivity extends AppCompatActivity implements
         expenseListShow.setArguments(bundle);
         ft.replace(R.id.fragmentContainer, expenseListShow);
         ft.addToBackStack("goToExpenseList");
+        ft.commit();
+
+    }
+
+    @Override
+    public void gotoimage(CameraContainer cameraContainer) {
+
+        Bundle bundle=new Bundle();
+        bundle.putString("imageName",cameraContainer.getImageName());
+        bundle.putString("imageUrl",cameraContainer.getImageURL());
+        bundle.putString("imageDateTime",cameraContainer.getDateTime());
+        bundle.putString("id",cameraContainer.getId());
+
+        ft=fm.beginTransaction();
+        TakeAphotoFragment aphotoFragment=new TakeAphotoFragment();
+        aphotoFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer,aphotoFragment);
+        ft.addToBackStack("gotocameraFragment");
         ft.commit();
 
     }

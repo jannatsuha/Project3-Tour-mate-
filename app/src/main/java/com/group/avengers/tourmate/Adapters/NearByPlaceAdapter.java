@@ -15,14 +15,14 @@ import com.group.avengers.tourmate.R;
 
 import java.util.List;
 
-public class NearByPlaceAdapter extends ArrayAdapter<NearbyByPlaceContent>{
+public class NearByPlaceAdapter extends ArrayAdapter{
 
 
     private Context context;
-    private List<NearbyByPlaceContent> getNearbyitems;
+    private List<Result> getNearbyitems;
 
 
-    public NearByPlaceAdapter(@NonNull Context context, List<NearbyByPlaceContent> getNearbyitems) {
+    public NearByPlaceAdapter(@NonNull Context context, List<Result> getNearbyitems) {
         super(context,R.layout.nearby_place_custome_row , getNearbyitems);
         this.context=context;
         this.getNearbyitems=getNearbyitems;
@@ -38,12 +38,9 @@ public class NearByPlaceAdapter extends ArrayAdapter<NearbyByPlaceContent>{
         TextView txtitemName=convertView.findViewById(R.id.txt_nearby_place_itemName);
         TextView txtitemLocation=convertView.findViewById(R.id.txt_nearby_place_itemAddress);
 
-        for (Result result:getNearbyitems.get(position).getResults()){
 
-            txtitemName.setText(result.getName());
-            txtitemLocation.setText(result.getVicinity());
-        }
-
+        txtitemName.setText(getNearbyitems.get(position).getName());
+        txtitemLocation.setText(getNearbyitems.get(position).getVicinity());
 
 
         return convertView;
