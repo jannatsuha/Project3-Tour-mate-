@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import static android.content.ContentValues.TAG;
 
@@ -182,6 +183,9 @@ public class EventRegisterFragment extends Fragment {
                 }else
                     Toast.makeText(getActivity(), "New Event Added", Toast.LENGTH_SHORT).show();
 
+//                HashMap<String, Object> totalExp = new HashMap<>();
+//                totalExp.put("totalExpense", "00");
+                FirebaseDatabase.getInstance().getReference().child("eventlist").child(eventID).child("totalExpense").setValue("0");
                 // clear edit text
                 mTourName.setText("");
                 mTourLocation.setText("");

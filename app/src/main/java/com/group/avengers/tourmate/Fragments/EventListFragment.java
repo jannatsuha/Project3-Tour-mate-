@@ -57,7 +57,7 @@ public class EventListFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mEventRecyclerView.setLayoutManager(llm);
 
-        Toast.makeText(getActivity(), "Hello every I am here", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "Hello every I am here", Toast.LENGTH_SHORT).show();
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("eventlist");
 

@@ -1,6 +1,7 @@
 package com.group.avengers.tourmate.Adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
 import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.R;
@@ -32,6 +34,7 @@ public class AllEventAdapter extends RecyclerView.Adapter<AllEventAdapter.Viewho
     Date date1,date2;
    // DetailsEventFragment eventFragment;
     public static List<Event> eventList;
+    public static List<Expense> expenseList;
     private Event model;
     private Context context;
 

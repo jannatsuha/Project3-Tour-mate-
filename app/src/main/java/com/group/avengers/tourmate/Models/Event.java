@@ -8,6 +8,7 @@ public class Event {
     private String createdDate;
     private String deparatureDate;
     private String budget;
+    //private String totalexpense;
 
     public Event() {
     }
@@ -20,6 +21,17 @@ public class Event {
         this.deparatureDate = deparatureDate;
         this.budget = budget;
     }
+
+//    public Event(String id, String eventName, String location, String destination, String createdDate, String deparatureDate, String budget, String expense) {
+//        this.id = id;
+//        this.eventName = eventName;
+//        this.location = location;
+//        this.destination = destination;
+//        this.createdDate = createdDate;
+//        this.deparatureDate = deparatureDate;
+//        this.budget = budget;
+//        this.expense = expense;
+//    }
 
     public Event(String id, String eventName, String location, String destination, String createdDate, String deparatureDate, String budget) {
         this.id = id;
@@ -62,6 +74,14 @@ public class Event {
     public void setDestination(String destination) {
         this.destination = destination;
     }
+
+//    public String getExpense() {
+//        return expense;
+//    }
+//
+//    public void setExpense(String expense) {
+//        this.expense = expense;
+//    }
 
     public String getCreatedDate() {
         return createdDate;

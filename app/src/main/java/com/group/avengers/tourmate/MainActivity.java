@@ -15,10 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
+import com.group.avengers.tourmate.Fragments.AddnewExpenseFragment;
 import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
+import com.group.avengers.tourmate.Fragments.ExpenseListShow;
 import com.group.avengers.tourmate.Models.Event;
 
 public class MainActivity extends AppCompatActivity implements
@@ -26,7 +29,10 @@ public class MainActivity extends AppCompatActivity implements
         ,EventRegisterFragment.TourRegistrationInterface
         ,EventListFragment.EventListInterface
         ,EventDetailFragment.EventDetailInterface
-        ,AddMoreBudgetFragment.AddMoreBudgetInterface{
+        ,AddMoreBudgetFragment.AddMoreBudgetInterface
+        ,AddnewExpenseFragment.AddnewExpenseInterface
+        ,ExpenseListShow.ExpenseListInterface
+        {
 
 
     private android.support.v4.app.FragmentManager fm;
@@ -66,43 +72,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     } //Enf Of On Create
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -228,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements
         bundle.putString("id",event.getId());
         bundle.putString("createdDate",event.getCreatedDate());
 
+       // bundle.putString("expense",event.getExpense());
 
 
         ft = fm.beginTransaction();
@@ -257,15 +228,48 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
+    @Override
+    public void gotoAddnewExpense(Event event) {
 
-    //----------------------------------------------------------------------------------------------
+        Bundle bundle = new Bundle();
+        bundle.putString("eventName",event.getEventName());
+        bundle.putString("budget",event.getBudget());
+        bundle.putString("destination",event.getDestination());
+        bundle.putString("location",event.getLocation());
+        bundle.putString("departureDate",event.getDeparatureDate());
+        bundle.putString("id",event.getId());
+        bundle.putString("createdDate",event.getCreatedDate());
+
+        ft = fm.beginTransaction();
+        AddnewExpenseFragment addnewExpenseFragment = new AddnewExpenseFragment();
+        addnewExpenseFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer, addnewExpenseFragment);
+        ft.addToBackStack("gotoAddnewExpense");
+        ft.commit();
+    }
+
+    @Override
+    public void goToExpenseList(Event event) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("eventName",event.getEventName());
+        bundle.putString("budget",event.getBudget());
+        bundle.putString("destination",event.getDestination());
+        bundle.putString("location",event.getLocation());
+        bundle.putString("departureDate",event.getDeparatureDate());
+        bundle.putString("id",event.getId());
+        bundle.putString("createdDate",event.getCreatedDate());
+
+        ft = fm.beginTransaction();
+        ExpenseListShow expenseListShow = new ExpenseListShow();
+        expenseListShow.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer, expenseListShow);
+        ft.addToBackStack("goToExpenseList");
+        ft.commit();
+
+    }
 
 
-
-
-
-
-
-
+            //----------------------------------------------------------------------------------------------
 
 }

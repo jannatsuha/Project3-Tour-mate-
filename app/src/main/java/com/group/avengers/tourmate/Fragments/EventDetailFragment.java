@@ -1,19 +1,25 @@
 package com.group.avengers.tourmate.Fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.MainActivity;
 import com.group.avengers.tourmate.Models.Event;
 import com.group.avengers.tourmate.R;
@@ -25,12 +31,17 @@ import java.util.HashMap;
  */
 public class EventDetailFragment extends Fragment {
 
-    private TextView eventNameShow,addExpence,viewExpense,addMoreBudget,takePhoto,viewGallery,viewMomonts,editEvent,deleteEvent,budSts1,budSta2;
-    private SeekBar seekBarBudget;
+    private Expense expense;
+    private TextView eventNameShow,addExpence,viewExpense,addMoreBudget,takePhoto,
+            viewGallery,viewMomonts,editEvent,deleteEvent,budSts1,budSta2;
+    private ProgressBar seekBarBudget;
+    private   String ids;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private AddMoreBudgetFragment.AddMoreBudgetInterface addMoreBudgetInterface;
+    private AddnewExpenseFragment.AddnewExpenseInterface addnewExpenseInterface;
+    private ExpenseListShow.ExpenseListInterface expenseListInterface;
     private Event modelEvent;
 
     public interface EventDetailInterface {
@@ -46,8 +57,12 @@ public class EventDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getActivity().setTitle(getArguments().getString("eventName"));
+
         View view= inflater.inflate(R.layout.activity_event_details, container, false);
+
         addMoreBudgetInterface = (AddMoreBudgetFragment.AddMoreBudgetInterface) getActivity();
+        addnewExpenseInterface= (AddnewExpenseFragment.AddnewExpenseInterface) getActivity();
+        expenseListInterface= (ExpenseListShow.ExpenseListInterface) getActivity();
         eventNameShow=view.findViewById(R.id.enentNameShow);
         addExpence=view.findViewById(R.id.addNewExpense);
         viewExpense=view.findViewById(R.id.viewAllExpense);
@@ -60,23 +75,27 @@ public class EventDetailFragment extends Fragment {
         seekBarBudget=view.findViewById(R.id.seekBar);
         budSts1=view.findViewById(R.id.bud1);
         budSta2=view.findViewById(R.id.bud2);
+        ids=(getArguments().getString("id"));
 
         if (getArguments()!=null)
         {
-            Toast.makeText(getActivity(), getArguments().getString("eventName"), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), getArguments().getString("eventName"), Toast.LENGTH_SHORT).show();
 
 
 
             final String names =(getArguments().getString("eventName"));
             final String budgets=(getArguments().getString("budget"));
-            final String ids=(getArguments().getString("id"));
+
             final String destinations=(getArguments().getString("destination"));
             final String departDates=(getArguments().getString("departureDate"));
             final String locations=(getArguments().getString("location"));
             final String createdDates=(getArguments().getString("createdDate"));
+            //final String expAmounts=(getArguments().getString("expense"));
+
             eventNameShow.setText(names);
             budSta2.setText(budgets);
-            budSts1.setText("0");
+           // budSts1.setText("0");
+          //  budSts1.setText(expAmounts);
             final Event event = new Event(ids,names,locations,destinations,createdDates,departDates,budgets);
 
             String idOfEvent=(getArguments().getString("id"));
@@ -84,21 +103,61 @@ public class EventDetailFragment extends Fragment {
             addMoreBudget.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getActivity(), "Add more Budget", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), "Add more Budget", Toast.LENGTH_SHORT).show();
                     addMoreBudgetInterface.gotoAddMoreBudget(event);
                 }
             });
 
-            seekBarBudget.setMax(0);
-            seekBarBudget.setMax(Integer.parseInt(getArguments().getString("budget")));
-            seekBarBudget.setProgress(0);
 
+            seekBarBudget.setMax(Integer.parseInt(getArguments().getString("budget")));
+          //  seekBarBudget.setMin();
+
+
+
+            addExpence.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   // Toast.makeText(getActivity(), "Add more Budget", Toast.LENGTH_SHORT).show();
+                    addnewExpenseInterface.gotoAddnewExpense(event);
+                }
+            });
+
+            viewExpense.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    expenseListInterface.goToExpenseList(event );
+
+                }
+            });
 
 //,,,,,,,,,,,,,,,,,,,,expense adding in event tree
+
 
 
         }
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference= firebaseDatabase.getReference("eventlist").child(ids).child("totalExpense");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String exp= dataSnapshot.getValue(String.class);
+                budSts1.setText(exp);
+                seekBarBudget.setProgress(Integer.parseInt(exp));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
