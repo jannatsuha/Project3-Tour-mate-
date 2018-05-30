@@ -118,6 +118,7 @@ public class AddnewExpenseFragment extends Fragment {
                     });
 
 
+
 //                    expOld= Integer.parseInt(expOld1);
 //                    int totalExpenseInt= expOld +expNew;
 //                    String totalExpFinal= String.valueOf(totalExpenseInt);
