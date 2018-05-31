@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.group.avengers.tourmate.Classes.CameraContainer;
 import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
@@ -156,6 +157,9 @@ public class MainActivity extends AppCompatActivity implements
         } else if (id == R.id.nav_logout)
         {
 
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
