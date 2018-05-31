@@ -78,6 +78,9 @@ public class AddnewExpenseFragment extends Fragment {
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         final  String date = df.format(Calendar.getInstance().getTime());
         if (getArguments()!=null) {
+
+
+
             final String names =(getArguments().getString("eventName"));
             final String budgets=(getArguments().getString("budget"));
             ids=(getArguments().getString("id"));
@@ -101,28 +104,28 @@ public class AddnewExpenseFragment extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids)
                             .child("expense").child(key).setValue(expense);
 
-                    /*firebaseDatabase1 = FirebaseDatabase.getInstance();
-                    databaseReference1= firebaseDatabase1.getReference("eventlist").child(ids).child("totalExpense");
-                    databaseReference1.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                    firebaseDatabase1 = FirebaseDatabase.getInstance();
+//                    databaseReference1= firebaseDatabase1.getReference("eventlist").child(ids).child("totalExpense");
+//                    databaseReference1.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                            expOld1= dataSnapshot.getValue(String.class);
+//
+//                            expOld= Integer.parseInt(expOld1);
+//                            Toast.makeText(getActivity(), "total expense  "+expOld, Toast.LENGTH_SHORT).show();
+//
+//                            int totalExpenseInt= (expNew+expOld);
+//                            totalExpFinal= String.valueOf(totalExpenseInt);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
 
-                            expOld1= dataSnapshot.getValue(String.class);
-
-                            expOld= Integer.parseInt(expOld1);
-                            Toast.makeText(getActivity(), "total expense  "+expOld, Toast.LENGTH_SHORT).show();
-
-                            int totalExpenseInt= (expNew+expOld);
-                            totalExpFinal= String.valueOf(totalExpenseInt);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-*/
-                    Toast.makeText(getActivity(), "total expense  "+totalExpFinal, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "total expense  "+totalExpFinal, Toast.LENGTH_SHORT).show();
 
 
                     Event event= new Event(ids,names,locations,destinations,createdDates,departDates,budgets);
@@ -141,10 +144,10 @@ public class AddnewExpenseFragment extends Fragment {
 
     @Override
     public void onStop() {
-/*
-        HashMap<String, Object> totalExp = new HashMap<>();
-        totalExp.put("totalExpense", totalExpFinal);
-        FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).updateChildren(totalExp);*/
+
+//        HashMap<String, Object> totalExp = new HashMap<>();
+//        totalExp.put("totalExpense", totalExpFinal);
+//        FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).updateChildren(totalExp);
         super.onStop();
     }
     }

@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements
         AddMoreBudgetFragment addMoreBudgetFragment1 = new AddMoreBudgetFragment();
         addMoreBudgetFragment1.setArguments(bundle);
         ft.replace(R.id.fragmentContainer, addMoreBudgetFragment1);
-        ft.addToBackStack("gotoAddMoreBudget");
+        //ft.addToBackStack("gotoAddMoreBudget");
         ft.commit();
     }
 
@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements
         AddnewExpenseFragment addnewExpenseFragment = new AddnewExpenseFragment();
         addnewExpenseFragment.setArguments(bundle);
         ft.replace(R.id.fragmentContainer, addnewExpenseFragment);
-        ft.addToBackStack("gotoAddnewExpense");
+        //ft.addToBackStack("gotoAddnewExpense");
         ft.commit();
     }
 

@@ -47,70 +47,74 @@ public class Login extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            Intent intent = new Intent(Login.this, CreateEvent.class);
-//            startActivity(intent);
-//        } else {
+        if (user != null) {
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+        } else {
 
-        btnlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String email = etEmail.getText().toString();
-                final String pass = etPass.getText().toString();
-                if (email.isEmpty()) {
-                    etEmail.setError(getText(R.string.ErrorLog));
-                } else if (pass.isEmpty()) {
-                    etPass.setError(getText(R.string.ErrorLog2));
-                }else{
-                    firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+            btnlogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String email = etEmail.getText().toString();
+                    final String pass = etPass.getText().toString();
+                    if (email.isEmpty()) {
+                        etEmail.setError(getText(R.string.ErrorLog));
+                    } else if (pass.isEmpty()) {
+                        etPass.setError(getText(R.string.ErrorLog2));
+                    } else {
+                        firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
 
-                                user = firebaseAuth.getCurrentUser();
-                                Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                Intent intent1 = new Intent(Login.this, MainActivity.class);
-                                startActivity(intent1);
-                            } else {
-                                errortxt.setText("Login Failed");
+                                    user = firebaseAuth.getCurrentUser();
+                                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    Intent intent1 = new Intent(Login.this, MainActivity.class);
+                                    startActivity(intent1);
+                                } else {
+                                    errortxt.setText("Login Failed");
+                                    errortxt.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                errortxt.setText("Incorrect Email/ Password");
                                 errortxt.setVisibility(View.VISIBLE);
                             }
+                        });
+                    }
 
+                }
+            });
+            forgotPass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    firebaseAuth.sendPasswordResetEmail(etEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Login.this, "Mail sent to your email!!", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            errortxt.setText("Incorrect Email/ Password");
-                            errortxt.setVisibility(View.VISIBLE);
+                            Toast.makeText(Login.this, e.toString() + "", Toast.LENGTH_SHORT).show();
                         }
-                    });}
+                    });
+                }
+            });
 
-            }
-        });
-        forgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth.sendPasswordResetEmail(etEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(Login.this, "Mail sent to your email!!", Toast.LENGTH_SHORT).show();
-                        }else{
-
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Login.this, e.toString()+"", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
+        }
     }
-    public void signUp(View view) {
-        Intent intent2 = new Intent(Login.this, Signup.class);
-        startActivity(intent2);
+        public void signUp (View view){
+            Intent intent2 = new Intent(Login.this, Signup.class);
+            startActivity(intent2);
+
     }
 }
+//FirebaseAuth.getInstance().signOut();
