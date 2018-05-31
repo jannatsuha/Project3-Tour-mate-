@@ -59,6 +59,7 @@ public class TakeAphotoFragment extends Fragment {
     private StorageReference storageReference;
     private DatabaseReference reference;
     private ProgressDialog dialog;
+    private CameraContainer imageUploadInfo=null;
 
 
     public interface TakeaPhotoInterface{
@@ -134,14 +135,17 @@ public class TakeAphotoFragment extends Fragment {
                     DateFormat dateTime=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
                     final String currentDateTime=dateTime.format(Calendar.getInstance().getTime());
 
+                    imageUploadInfo.setDateTime(currentDateTime);
+
                     StorageReference storageReference2=storageReference.child(user.getUid()).child(firebase_directory_path+photoFilePath);
 
                     storageReference2.putFile(Uri.fromFile(photoFilePath)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             String imageName=edtImageName.getText().toString().trim();
+                            String dateandtime=imageUploadInfo.getDateTime();
                             dialog.dismiss();
-                            CameraContainer imageUploadInfo=new CameraContainer(imageName,taskSnapshot.getDownloadUrl().toString(),currentDateTime);
+                            imageUploadInfo=new CameraContainer(imageName,taskSnapshot.getDownloadUrl().toString(),dateandtime);
                             String imageUploadId=reference.push().getKey();
                             reference.child(user.getUid()).child(imageUploadId).setValue(imageUploadInfo);
                             Toast.makeText(getActivity(), "Image Upload Succesfull", Toast.LENGTH_SHORT).show();

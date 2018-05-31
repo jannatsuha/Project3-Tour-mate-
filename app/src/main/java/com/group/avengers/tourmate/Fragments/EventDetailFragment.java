@@ -25,7 +25,9 @@ import com.group.avengers.tourmate.MainActivity;
 import com.group.avengers.tourmate.Models.Event;
 import com.group.avengers.tourmate.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,12 +85,6 @@ public class EventDetailFragment extends Fragment {
         budSta2=view.findViewById(R.id.bud2);
         ids=(getArguments().getString("id"));
 
-
-
-
-
-
-
         if (getArguments()!=null)
         {
            // Toast.makeText(getActivity(), getArguments().getString("eventName"), Toast.LENGTH_SHORT).show();
@@ -104,9 +100,6 @@ public class EventDetailFragment extends Fragment {
             final String createdDates=(getArguments().getString("createdDate"));
             //final String expAmounts=(getArguments().getString("expense"));
 
-
-
-
             // get camera argument
 
             String imagename=getArguments().getString("imageName");
@@ -115,13 +108,7 @@ public class EventDetailFragment extends Fragment {
             String id=getArguments().getString("id");
 
             final CameraContainer cameraContainer=new CameraContainer(id,imagename,imageUrl,currentDateAndTime);
-
-
-
-
-
-
-            eventNameShow.setText(names);
+             eventNameShow.setText(names);
             budSta2.setText(budgets);
            // budSts1.setText("0");
           //  budSts1.setText(expAmounts);
@@ -169,8 +156,6 @@ public class EventDetailFragment extends Fragment {
 
 //,,,,,,,,,,,,,,,,,,,,expense adding in event tree
 
-
-
         }
         return view;
     }
@@ -180,14 +165,25 @@ public class EventDetailFragment extends Fragment {
         super.onStart();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference= firebaseDatabase.getReference("eventlist").child(ids).child("totalExpense");
+        databaseReference= firebaseDatabase.getReference("eventlist").child(ids).child("expense");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+/*
                 String exp= dataSnapshot.getValue(String.class);
                 budSts1.setText(exp);
-                seekBarBudget.setProgress(Integer.parseInt(exp));
+                seekBarBudget.setProgress(Integer.parseInt(exp));*/
+                List<Expense>expenses = new ArrayList<>();
+                for(DataSnapshot d : dataSnapshot.getChildren()){
+                    Expense e = d.getValue(Expense.class);
+                    expenses.add(e);
+                }
+                double amount = 0.0;
+                for(Expense e : expenses){
+                    amount += Double.parseDouble(e.getAmount());
+                }
+                budSts1.setText(String.valueOf(amount));
+                seekBarBudget.setProgress((int) amount);
             }
 
             @Override

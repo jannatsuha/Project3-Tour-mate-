@@ -29,6 +29,7 @@
         android:textColorHint="#fb5c5252"
         android:textAlignment="center"
         android:hint="Email Address"
+        android:text="jannatsuha@gmail.com"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"/>
@@ -38,6 +39,7 @@
         android:textColorHint="#fb5c5252"
         android:textAlignment="center"
         android:hint="Password"
+        android:text="123456"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

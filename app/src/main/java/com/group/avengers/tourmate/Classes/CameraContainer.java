@@ -28,6 +28,10 @@ public class CameraContainer {
         this.dateTime = dateTime;
     }
 
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public String getId() {
         return id;
     }
