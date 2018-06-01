@@ -20,6 +20,7 @@ import com.group.avengers.tourmate.Classes.CameraContainer;
 import com.group.avengers.tourmate.Classes.Expense;
 import com.group.avengers.tourmate.Fragments.AddMoreBudgetFragment;
 import com.group.avengers.tourmate.Fragments.AddnewExpenseFragment;
+import com.group.avengers.tourmate.Fragments.EditEventFragment;
 import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements
         ,TakeAphotoFragment.TakeaPhotoInterface
         ,View_All_Moment_fragment.View_all_moment_interface
         ,GalleryFragment.ViewGalleryInterface
+        ,EditEventFragment.EditEventInterface
         {
 
 
@@ -222,6 +224,14 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void gotoeventListFragment() {
+
+        ft=fm.beginTransaction();
+        EventListFragment eventListFragment=new EventListFragment();
+        ft.replace(R.id.fragmentContainer,eventListFragment).commit();
+    }
+
+            @Override
     public void gotoAddMoreBudget(Event event) {
         Bundle bundle = new Bundle();
         bundle.putString("eventName",event.getEventName());
@@ -329,6 +339,33 @@ public class MainActivity extends AppCompatActivity implements
         FullImageFragment imageFragment=new FullImageFragment();
         imageFragment.setArguments(bundle);
         ft.replace(R.id.fragmentContainer,imageFragment).addToBackStack("goto Full image  Section").commit();
+    }
+
+    @Override
+    public void gotoEditEventFragment(Event event) {
+        Bundle bundle = new Bundle();
+        bundle.putString("eventName",event.getEventName());
+        bundle.putString("budget",event.getBudget());
+        bundle.putString("destination",event.getDestination());
+        bundle.putString("location",event.getLocation());
+        bundle.putString("departureDate",event.getDeparatureDate());
+        bundle.putString("id",event.getId());
+        bundle.putString("createdDate",event.getCreatedDate());
+
+
+        ft=fm.beginTransaction();
+        EditEventFragment eventFragment=new EditEventFragment();
+        eventFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer,eventFragment).addToBackStack("go to Edit Event").commit();
+
+    }
+
+    @Override
+    public void gotoEventDetailsFragment() {
+
+        ft=fm.beginTransaction();
+        EventDetailFragment detailFragment=new EventDetailFragment();
+        ft.replace(R.id.fragmentContainer,detailFragment).addToBackStack("go to event details fragment").commit();
     }
 
 

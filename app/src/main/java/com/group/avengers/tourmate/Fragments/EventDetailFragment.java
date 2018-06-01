@@ -1,8 +1,10 @@
 package com.group.avengers.tourmate.Fragments;
 
 
+import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.gdacciaro.iOSDialog.iOSDialog;
+import com.gdacciaro.iOSDialog.iOSDialogBuilder;
+import com.gdacciaro.iOSDialog.iOSDialogClickListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,10 +55,13 @@ public class EventDetailFragment extends Fragment {
     private TakeAphotoFragment.TakeaPhotoInterface takeaPhotoInterface;
     private View_All_Moment_fragment.View_all_moment_interface moment_interface;
     private GalleryFragment.ViewGalleryInterface galleryInterface;
+    private EditEventFragment.EditEventInterface eventInterface;
+    private EventDetailInterface eventDetailInterface;
     private Event modelEvent;
 
     public interface EventDetailInterface {
         public void goToEventDetail (Event event);
+        void gotoeventListFragment();
     }
     public EventDetailFragment() {
         // Required empty public constructor
@@ -72,7 +82,8 @@ public class EventDetailFragment extends Fragment {
         takeaPhotoInterface= (TakeAphotoFragment.TakeaPhotoInterface) getActivity();
         moment_interface= (View_All_Moment_fragment.View_all_moment_interface) getActivity();
         galleryInterface= (GalleryFragment.ViewGalleryInterface) getActivity();
-
+        eventInterface= (EditEventFragment.EditEventInterface) getActivity();
+        eventDetailInterface= (EventDetailInterface) getActivity();
 
 
         eventNameShow=view.findViewById(R.id.enentNameShow);
@@ -172,6 +183,52 @@ public class EventDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     galleryInterface.gotoGalleryFragment(camera_all_moment);
+                }
+            });
+
+            editEvent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    eventInterface.gotoEditEventFragment(event);
+                }
+            });
+
+            deleteEvent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new iOSDialogBuilder(getActivity())
+                            .setTitle("!Warning")
+                            .setSubtitle("Do you really want to delete This Event Please Confirm ")
+                            .setBoldPositiveLabel(true)
+                            .setCancelable(false)
+                            .setPositiveListener("Yes",new iOSDialogClickListener() {
+                                @Override
+                                public void onClick(iOSDialog dialog) {
+
+                                    FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            eventDetailInterface.gotoeventListFragment();
+                                            Toast.makeText(getActivity(),"Delete Sussesfull",Toast.LENGTH_LONG).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getActivity(), "Faield To Delete", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                    dialog.dismiss();
+
+                                }
+                            })
+                            .setNegativeListener("No", new iOSDialogClickListener() {
+                                @Override
+                                public void onClick(iOSDialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .build().show();
                 }
             });
 

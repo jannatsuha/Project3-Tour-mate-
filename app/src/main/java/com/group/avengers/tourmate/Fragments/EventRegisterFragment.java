@@ -46,6 +46,7 @@ public class EventRegisterFragment extends Fragment {
     private String thisDate;
     private String deparatureDate;
     private int year,day,month;
+
     public interface TourRegistrationInterface {
         public void goToEventRegistration();
     }

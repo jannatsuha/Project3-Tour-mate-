@@ -53,6 +53,7 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.0.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.gdacciaro:iosdialog:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

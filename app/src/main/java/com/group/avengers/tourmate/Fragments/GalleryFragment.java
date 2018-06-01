@@ -58,7 +58,7 @@ public class GalleryFragment extends Fragment {
 
         String id=getArguments().getString("id");
 
-        dialog=new ProgressDialog(getActivity());
+        dialog=new ProgressDialog(getContext());
         dialog.setMessage("Please Whit.....");
         dialog.show();
 
