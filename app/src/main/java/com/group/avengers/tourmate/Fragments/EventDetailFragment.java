@@ -46,6 +46,7 @@ public class EventDetailFragment extends Fragment {
     private AddnewExpenseFragment.AddnewExpenseInterface addnewExpenseInterface;
     private ExpenseListShow.ExpenseListInterface expenseListInterface;
     private TakeAphotoFragment.TakeaPhotoInterface takeaPhotoInterface;
+    private View_All_Moment_fragment.View_all_moment_interface moment_interface;
     private Event modelEvent;
 
     public interface EventDetailInterface {
@@ -68,6 +69,7 @@ public class EventDetailFragment extends Fragment {
         addnewExpenseInterface= (AddnewExpenseFragment.AddnewExpenseInterface) getActivity();
         expenseListInterface= (ExpenseListShow.ExpenseListInterface) getActivity();
         takeaPhotoInterface= (TakeAphotoFragment.TakeaPhotoInterface) getActivity();
+        moment_interface= (View_All_Moment_fragment.View_all_moment_interface) getActivity();
 
 
 
@@ -108,6 +110,9 @@ public class EventDetailFragment extends Fragment {
             String id=getArguments().getString("id");
 
             final CameraContainer cameraContainer=new CameraContainer(id,imagename,imageUrl,currentDateAndTime);
+
+            final CameraContainer camera_all_moment=new CameraContainer(id);
+
              eventNameShow.setText(names);
             budSta2.setText(budgets);
            // budSts1.setText("0");
@@ -151,6 +156,13 @@ public class EventDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     takeaPhotoInterface.gotoimage(cameraContainer);
+                }
+            });
+
+            viewMomonts.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    moment_interface.gotoAllMomentsection(camera_all_moment);
                 }
             });
 

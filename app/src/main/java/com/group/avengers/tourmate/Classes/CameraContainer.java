@@ -14,7 +14,11 @@ public class CameraContainer {
 
     }
 
-    public CameraContainer(String name, String url,String dateTime) {
+    public CameraContainer(String id) {
+        this.id = id;
+    }
+
+    public CameraContainer(String name, String url, String dateTime) {
 
         this.imageName = name;
         this.imageURL= url;

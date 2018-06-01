@@ -83,6 +83,8 @@ public class TakeAphotoFragment extends Fragment {
         btnCameraOpen=view.findViewById(R.id.btnChooseOpenCmera);
         btnUploadPhoto=view.findViewById(R.id.btnUploadImage);
 
+
+
         String imagename=getArguments().getString("imageName");
         String imageUrl=getArguments().getString("imageUrl");
         String currentDateAndTime=getArguments().getString("imageDateTime");
@@ -132,20 +134,19 @@ public class TakeAphotoFragment extends Fragment {
                     dialog.show();
                     final FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
-                    DateFormat dateTime=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
-                    final String currentDateTime=dateTime.format(Calendar.getInstance().getTime());
+//
 
-                    imageUploadInfo.setDateTime(currentDateTime);
+                    final String currentDateTime=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").format(new Date());
 
+//
                     StorageReference storageReference2=storageReference.child(user.getUid()).child(firebase_directory_path+photoFilePath);
 
                     storageReference2.putFile(Uri.fromFile(photoFilePath)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             String imageName=edtImageName.getText().toString().trim();
-                            String dateandtime=imageUploadInfo.getDateTime();
                             dialog.dismiss();
-                            imageUploadInfo=new CameraContainer(imageName,taskSnapshot.getDownloadUrl().toString(),dateandtime);
+                            imageUploadInfo=new CameraContainer(imageName,taskSnapshot.getDownloadUrl().toString(),currentDateTime);
                             String imageUploadId=reference.push().getKey();
                             reference.child(user.getUid()).child(imageUploadId).setValue(imageUploadInfo);
                             Toast.makeText(getActivity(), "Image Upload Succesfull", Toast.LENGTH_SHORT).show();
@@ -159,7 +160,9 @@ public class TakeAphotoFragment extends Fragment {
                     }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            dialog.setTitle("Image is Uploding");
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            dialog.setTitle("Uploading");
+                            dialog.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
                     });
 

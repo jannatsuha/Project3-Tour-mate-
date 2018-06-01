@@ -25,6 +25,7 @@ import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
 import com.group.avengers.tourmate.Fragments.ExpenseListShow;
 import com.group.avengers.tourmate.Fragments.TakeAphotoFragment;
+import com.group.avengers.tourmate.Fragments.View_All_Moment_fragment;
 import com.group.avengers.tourmate.Models.Event;
 
 public class MainActivity extends AppCompatActivity implements
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements
         ,AddnewExpenseFragment.AddnewExpenseInterface
         ,ExpenseListShow.ExpenseListInterface
         ,TakeAphotoFragment.TakeaPhotoInterface
+        ,View_All_Moment_fragment.View_all_moment_interface
         {
 
 
@@ -292,6 +294,18 @@ public class MainActivity extends AppCompatActivity implements
         ft.addToBackStack("gotocameraFragment");
         ft.commit();
 
+    }
+
+    @Override
+    public void gotoAllMomentsection(CameraContainer cameraContainer) {
+
+        Bundle bundle=new Bundle();
+        bundle.putString("id",cameraContainer.getId());
+
+        ft=fm.beginTransaction();
+        View_All_Moment_fragment moment=new View_All_Moment_fragment();
+        moment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer,moment).addToBackStack("gotoMomentSection").commit();
     }
 
 
