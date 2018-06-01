@@ -47,6 +47,7 @@ public class EventDetailFragment extends Fragment {
     private ExpenseListShow.ExpenseListInterface expenseListInterface;
     private TakeAphotoFragment.TakeaPhotoInterface takeaPhotoInterface;
     private View_All_Moment_fragment.View_all_moment_interface moment_interface;
+    private GalleryFragment.ViewGalleryInterface galleryInterface;
     private Event modelEvent;
 
     public interface EventDetailInterface {
@@ -70,6 +71,7 @@ public class EventDetailFragment extends Fragment {
         expenseListInterface= (ExpenseListShow.ExpenseListInterface) getActivity();
         takeaPhotoInterface= (TakeAphotoFragment.TakeaPhotoInterface) getActivity();
         moment_interface= (View_All_Moment_fragment.View_all_moment_interface) getActivity();
+        galleryInterface= (GalleryFragment.ViewGalleryInterface) getActivity();
 
 
 
@@ -163,6 +165,13 @@ public class EventDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     moment_interface.gotoAllMomentsection(camera_all_moment);
+                }
+            });
+
+            viewGallery.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    galleryInterface.gotoGalleryFragment(camera_all_moment);
                 }
             });
 

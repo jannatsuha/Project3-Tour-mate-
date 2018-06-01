@@ -24,6 +24,8 @@ import com.group.avengers.tourmate.Fragments.EventDetailFragment;
 import com.group.avengers.tourmate.Fragments.EventListFragment;
 import com.group.avengers.tourmate.Fragments.EventRegisterFragment;
 import com.group.avengers.tourmate.Fragments.ExpenseListShow;
+import com.group.avengers.tourmate.Fragments.FullImageFragment;
+import com.group.avengers.tourmate.Fragments.GalleryFragment;
 import com.group.avengers.tourmate.Fragments.TakeAphotoFragment;
 import com.group.avengers.tourmate.Fragments.View_All_Moment_fragment;
 import com.group.avengers.tourmate.Models.Event;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements
         ,ExpenseListShow.ExpenseListInterface
         ,TakeAphotoFragment.TakeaPhotoInterface
         ,View_All_Moment_fragment.View_all_moment_interface
+        ,GalleryFragment.ViewGalleryInterface
         {
 
 
@@ -306,6 +309,26 @@ public class MainActivity extends AppCompatActivity implements
         View_All_Moment_fragment moment=new View_All_Moment_fragment();
         moment.setArguments(bundle);
         ft.replace(R.id.fragmentContainer,moment).addToBackStack("gotoMomentSection").commit();
+    }
+
+    @Override
+    public void gotoGalleryFragment(CameraContainer cameraContainer) {
+        Bundle bundle=new Bundle();
+        bundle.putString("id",cameraContainer.getId());
+        ft=fm.beginTransaction();
+        GalleryFragment galleryFragment=new GalleryFragment();
+        galleryFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer,galleryFragment).addToBackStack("goto Gallery Section").commit();
+    }
+
+    @Override
+    public void gotoFullGalleryFragment(CameraContainer cameraContainer) {
+        Bundle bundle=new Bundle();
+        bundle.putString("image",cameraContainer.getImageURL());
+        ft=fm.beginTransaction();
+        FullImageFragment imageFragment=new FullImageFragment();
+        imageFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer,imageFragment).addToBackStack("goto Full image  Section").commit();
     }
 
 
