@@ -51,7 +51,7 @@ public class View_All_Moment_fragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_view__all__moment_fragment, container, false);
 
         recyclerView=view.findViewById(R.id.recyclerView);
-
+        getActivity().setTitle("Moments");
 
 
         String id=getArguments().getString("id");

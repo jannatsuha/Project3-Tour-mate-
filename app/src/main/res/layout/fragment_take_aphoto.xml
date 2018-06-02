@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@drawable/backgrounds_demo"
     tools:context=".Fragments.TakeAphotoFragment">
+
+
+
+
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,10 +17,20 @@
         android:layout_height="wrap_content"
         android:text="Firebase Image Upload Tutorial"
         android:id="@+id/textview"
+        android:shadowColor="#552e2c2c"
+        android:shadowDx="6"
+        android:shadowDy="6"
+        android:shadowRadius="6"
         android:textStyle="bold"
         android:textSize="20dp"
         android:gravity="center"
         android:layout_marginTop="20dp"/>
+    <View
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="54dp"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
 
     <ImageView
         android:layout_width="fill_parent"
@@ -28,11 +43,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnChooseOpenCmera"
+        android:textSize="18sp"
+        android:textColor="#352f2f"
+        android:background="@drawable/button_back"
         android:layout_below="@+id/imageViewcameraDisplay"
         android:layout_marginTop="20dp"
         android:text="Open Camera"/>
 
     <EditText
+        android:textSize="19sp"
+        android:textColor="#243524"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtimageName"
@@ -47,6 +67,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtimageName"
         android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:textColor="#352f2f"
+        android:textStyle="bold"
+        android:background="@drawable/button_back"
         android:text="Upload image to Firebase Storage" />
 
 </LinearLayout>

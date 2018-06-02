@@ -5,7 +5,43 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.FullImageFragment">
 
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/liniar_please_whit"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="Please Whit few minute Processings your photo form server"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/liniar_no_data_founds"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="No data Founds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
     <!-- TODO: Update blank fragment layout -->
+
     <ImageView
         android:id="@+id/image_Details"
         android:src="@drawable/ic_launcher_background"

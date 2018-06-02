@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +38,7 @@ public class GalleryFragment extends Fragment {
     private GalleryAdapter adapter;
     private GridView gridView;
     private ViewGalleryInterface galleryInterface;
+    private android.widget.LinearLayout llm1,llm2;
 
     public GalleryFragment() {
         // Required empty public constructor
@@ -54,13 +56,21 @@ public class GalleryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_gallery, container, false);
 
+        getActivity().setTitle("Gallery");
+
         gridView=view.findViewById(R.id.gridView);
+        llm1=view.findViewById(R.id.liniar_please_whit);
+        llm2=view.findViewById(R.id.liniar_no_data_founds);
+
 
         String id=getArguments().getString("id");
 
         dialog=new ProgressDialog(getContext());
         dialog.setMessage("Please Whit.....");
         dialog.show();
+
+        llm1.setVisibility(View.VISIBLE);
+        gridView.setVisibility(View.GONE);
 
         galleryInterface= (ViewGalleryInterface) getActivity();
 
@@ -74,18 +84,29 @@ public class GalleryFragment extends Fragment {
 
                 for (DataSnapshot data:dataSnapshot.getChildren()){
                     dialog.dismiss();
+                    llm1.setVisibility(View.GONE);
+                    gridView.setVisibility(View.VISIBLE);
+
                     CameraContainer info=data.getValue(CameraContainer.class);
-                    containers.add(info);
-                    adapter=new GalleryAdapter(getActivity(),containers);
-                    adapter.notifyDataSetChanged();
-                    gridView.setAdapter(adapter);
-                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            CameraContainer imageposition=containers.get(position);
-                            galleryInterface.gotoFullGalleryFragment(imageposition);
-                        }
-                    });
+                    if (info==null){
+                        llm2.setVisibility(View.VISIBLE);
+                    }else {
+
+                        containers.add(info);
+                        adapter=new GalleryAdapter(getActivity(),containers);
+                        adapter.notifyDataSetChanged();
+                        gridView.setAdapter(adapter);
+                        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                CameraContainer imageposition=containers.get(position);
+                                Toast.makeText(getActivity(), "Please whit few second Download your image form server", Toast.LENGTH_SHORT).show();
+                                galleryInterface.gotoFullGalleryFragment(imageposition);
+                            }
+                        });
+
+                    }
+
 
                 }
             }

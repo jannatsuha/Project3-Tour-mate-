@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/gridView"
-    android:numColumns="auto_fit"
-    android:verticalSpacing="10dp"
-    android:horizontalSpacing="10dp"
-    android:columnWidth="90dp"
+    android:background="@drawable/backgrounds_demo"
+    android:orientation="vertical"
     tools:context=".Fragments.GalleryFragment">
 
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/liniar_please_whit"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="Please Whit few minute Processings your photo form server"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/liniar_no_data_founds"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="No data Founds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 
-</GridView>
+    <GridView
+        android:id="@+id/gridView"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:columnWidth="90dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></GridView>
+
+</LinearLayout>
