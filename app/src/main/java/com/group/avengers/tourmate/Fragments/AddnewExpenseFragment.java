@@ -30,10 +30,11 @@ import java.util.HashMap;
 public class AddnewExpenseFragment extends Fragment {
 
 
+    private String exp,amounts;
     private  EditText etAmount1,etComment1;
     private  Button btnAdd;
     private String totalExpense, ids;
-    private  int expOld;
+    private  int expOld,expint,temp;
     private String expOld1;
     private  String totalExpFinal;
     private EventDetailFragment.EventDetailInterface eventDetailInterface;
@@ -89,20 +90,44 @@ public class AddnewExpenseFragment extends Fragment {
             final String locations=(getArguments().getString("location"));
             final String createdDates=(getArguments().getString("createdDate"));
 
+            databaseReference = firebaseDatabase.getReference("eventlist").child(ids).child("TotalExpense");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    expint = dataSnapshot.getValue(Integer.class);
+                   // Toast.makeText(getActivity(), "+"+expint, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                    }
+            );
+
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    final String amounts= etAmount1.getText().toString();
-                    final String comments=etComment1.getText().toString();
-                    final int expNew= Integer.parseInt(amounts);
+                      amounts = etAmount1.getText().toString();
+                    final String comments = etComment1.getText().toString();
 
-                    String key= databaseReference.push().getKey();
+                    String key = databaseReference.push().getKey();
 
-                    final Expense expense= new Expense(amounts,date,comments);
 
-                    FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids)
-                            .child("expense").child(key).setValue(expense);
+                    temp = Integer.parseInt(amounts) + expint;
+                    //Toast.makeText(getActivity(), "second"+temp, Toast.LENGTH_LONG).show();
+                    if (temp > Integer.parseInt(budgets)) {
+                        Toast.makeText(getActivity(), "Your expense is crossing your budget", Toast.LENGTH_LONG).show();
+                        Event event = new Event(ids, names, locations, destinations, createdDates, departDates, budgets);
+                        eventDetailInterface.goToEventDetail(event);
+
+                    } else {
+                        final Expense expense = new Expense(amounts, date, comments);
+
+
+                        FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids)
+                                .child("expense").child(key).setValue(expense);
 
 //                    firebaseDatabase1 = FirebaseDatabase.getInstance();
 //                    databaseReference1= firebaseDatabase1.getReference("eventlist").child(ids).child("totalExpense");
@@ -125,11 +150,12 @@ public class AddnewExpenseFragment extends Fragment {
 //                        }
 //                    });
 
-                    //Toast.makeText(getActivity(), "total expense  "+totalExpFinal, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "total expense  "+totalExpFinal, Toast.LENGTH_SHORT).show();
 
 
-                    Event event= new Event(ids,names,locations,destinations,createdDates,departDates,budgets);
-                    eventDetailInterface.goToEventDetail(event);
+                        Event event = new Event(ids, names, locations, destinations, createdDates, departDates, budgets);
+                        eventDetailInterface.goToEventDetail(event);
+                    }
                 }
             });
 
@@ -141,6 +167,7 @@ public class AddnewExpenseFragment extends Fragment {
 
 
     }
+
 
     @Override
     public void onStop() {
