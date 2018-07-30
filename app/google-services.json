@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "353612297612-heta9ufr08a5l9e0n3n0e50k4too3i6c.apps.googleusercontent.com",
+          "client_id": "353612297612-3860kfg88h63cvo3ip7t9qqh61b9vdsm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.group.avengers.tourmate",
-            "certificate_hash": "d2ae4e6d61be542036c6352f0bb85e5064036e80"
+            "certificate_hash": "d5d65b4f9b6b1610ea3ca82e51b58ebe27f2cd8c"
           }
         },
         {
@@ -31,16 +31,12 @@
           }
         },
         {
-          "client_id": "353612297612-3860kfg88h63cvo3ip7t9qqh61b9vdsm.apps.googleusercontent.com",
+          "client_id": "353612297612-heta9ufr08a5l9e0n3n0e50k4too3i6c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.group.avengers.tourmate",
-            "certificate_hash": "d5d65b4f9b6b1610ea3ca82e51b58ebe27f2cd8c"
+            "certificate_hash": "d2ae4e6d61be542036c6352f0bb85e5064036e80"
           }
-        },
-        {
-          "client_id": "353612297612-8j5sra3nlppb8r346q0tvi4ipdhbulbr.apps.googleusercontent.com",
-          "client_type": 3
         },
         {
           "client_id": "353612297612-8j5sra3nlppb8r346q0tvi4ipdhbulbr.apps.googleusercontent.com",
