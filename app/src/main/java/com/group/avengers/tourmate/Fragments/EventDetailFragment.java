@@ -244,7 +244,7 @@ public class EventDetailFragment extends Fragment {
 
 //        String key= databaseReference.push().getKey();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference= firebaseDatabase.getReference("eventlist").child(ids).child("expense");
+        databaseReference= firebaseDatabase.getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(ids).child("expense");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -265,7 +265,7 @@ public class EventDetailFragment extends Fragment {
 
                 seekBarBudget.setProgress((int) amount);
 
-                FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).child("TotalExpense")
+                FirebaseDatabase.getInstance().getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(ids).child("TotalExpense")
                         .setValue(amount);
             }
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -90,19 +91,20 @@ public class AddnewExpenseFragment extends Fragment {
             final String locations=(getArguments().getString("location"));
             final String createdDates=(getArguments().getString("createdDate"));
 
-            databaseReference = firebaseDatabase.getReference("eventlist").child(ids).child("TotalExpense");
+            databaseReference = firebaseDatabase.getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser()
+                    .getUid()).child("Eventlist").child(ids).child("TotalExpense");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     expint = dataSnapshot.getValue(Integer.class);
-                   // Toast.makeText(getActivity(), "+"+expint, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "+"+expint, Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                    }
-                    }
+                                                        }
+                                                    }
             );
 
             btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +128,7 @@ public class AddnewExpenseFragment extends Fragment {
                         final Expense expense = new Expense(amounts, date, comments);
 
 
-                        FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids)
+                        FirebaseDatabase.getInstance().getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(ids)
                                 .child("expense").child(key).setValue(expense);
 
 //                    firebaseDatabase1 = FirebaseDatabase.getInstance();

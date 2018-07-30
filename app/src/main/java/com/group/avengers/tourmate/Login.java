@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     EditText etEmail, etPass;
     TextView errortxt,forgotPass;
     FirebaseAuth firebaseAuth;
-    FirebaseUser user;
+    FirebaseUser user,user2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+       // user2 = FirebaseAuth.getInstance().getCurrentUser().;
         if (user != null) {
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);

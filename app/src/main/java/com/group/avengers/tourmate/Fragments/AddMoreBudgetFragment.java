@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group.avengers.tourmate.Models.Event;
 import com.group.avengers.tourmate.R;
@@ -68,7 +69,8 @@ public class AddMoreBudgetFragment extends Fragment {
 
                HashMap<String, Object> strBudget1 = new HashMap<>();
                strBudget1.put("budget", strBudget);
-               FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).updateChildren(strBudget1);
+               String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+               FirebaseDatabase.getInstance().getReference("UserData").child(currentUser).child("Eventlist").child(ids).updateChildren(strBudget1);
                Toast.makeText(getActivity(), "More Budget Added", Toast.LENGTH_SHORT).show();
 
                Event event= new Event(ids,names,locations,destinations,createdDates,departDates,tempBudget);

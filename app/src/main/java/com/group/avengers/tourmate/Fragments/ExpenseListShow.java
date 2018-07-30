@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,7 +67,7 @@ public class ExpenseListShow extends Fragment {
         final String createdDates=(getArguments().getString("createdDate"));
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("eventlist").child(ids).child("expense");
+        databaseReference = firebaseDatabase.getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(ids).child("expense");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

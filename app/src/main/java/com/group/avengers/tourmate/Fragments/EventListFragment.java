@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class EventListFragment extends Fragment {
     private FirebaseDatabase mFirebaseInstance;
     private RecyclerView mEventRecyclerView;
     private AllEventAdapter allEventAdapter;
+
     private List<Event> eventList = new ArrayList<>();
     LinearLayoutManager llm;
     private SkeletonScreen skeletonScreen;
@@ -59,7 +62,13 @@ public class EventListFragment extends Fragment {
 
        // Toast.makeText(getActivity(), "Hello every I am here", Toast.LENGTH_SHORT).show();
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference("eventlist");
+
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+       //mFirebaseDatabase = mFirebaseInstance.getReference("eventlist");
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("UserData").child(currentUser).child("Eventlist");
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override

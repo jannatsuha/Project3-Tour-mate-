@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -89,7 +90,8 @@ public class EditEventFragment extends Fragment {
 
 
         firebasedatabse = FirebaseDatabase.getInstance();
-        firebaseReference = firebasedatabse.getReference("eventlist");
+        //String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firebaseReference = firebasedatabse.getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist");
 
 
         //initialization ();
@@ -155,7 +157,7 @@ public class EditEventFragment extends Fragment {
                 Event event= new Event(ids,mTourName.getText().toString(),mTourLocation.getText().toString(),mTourDesination.getText().toString()
                 ,createdDates,deparaturedate,mTourBudget.getText().toString());
 
-                FirebaseDatabase.getInstance().getReference().child("eventlist").child(ids).setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
+                FirebaseDatabase.getInstance().getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(ids).setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){

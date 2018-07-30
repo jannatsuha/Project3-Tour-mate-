@@ -75,7 +75,7 @@ public class GalleryFragment extends Fragment {
         galleryInterface= (ViewGalleryInterface) getActivity();
 
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference("eventlist").child(id).child("images").child(user.getUid());
+        reference= FirebaseDatabase.getInstance().getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(id).child("images").child(user.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

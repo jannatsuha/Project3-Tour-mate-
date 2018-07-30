@@ -93,7 +93,7 @@ public class TakeAphotoFragment extends Fragment {
 
         storageReference= FirebaseStorage.getInstance().getReference();
 
-        reference= FirebaseDatabase.getInstance().getReference("eventlist").child(id).child("images");
+        reference= FirebaseDatabase.getInstance().getReference("UserData").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Eventlist").child(id).child("images");
         dialog=new ProgressDialog(getContext());
 
 

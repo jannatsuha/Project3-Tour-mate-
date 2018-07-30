@@ -14,6 +14,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,12 +38,14 @@ import static android.content.ContentValues.TAG;
 public class EventRegisterFragment extends Fragment {
 
 
+    String currentUser;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private EditText mTourName,mTourLocation,mTourDesination,mTourDeparatureDate,mTourBudget;
     private Button mCreateEventButton,mDatePickerButton;
     private String eventID;
     private Calendar calendar;
+    private FirebaseUser user;
     private DatePickerDialog datePickerDialog;
     private String thisDate;
     private String deparatureDate;
@@ -79,9 +83,13 @@ public class EventRegisterFragment extends Fragment {
 
 
 
+        // mFirebaseDatabase = mFirebaseInstance.getReference("UserData").child(String.valueOf(user)).child("Eventlist");
+
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference("eventlist");
+       // mFirebaseDatabase = mFirebaseInstance.getReference("eventlist");
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mFirebaseDatabase = mFirebaseInstance.getReference("UserData").child(currentUser).child("Eventlist");
 
 
         initialization ();
@@ -186,7 +194,7 @@ public class EventRegisterFragment extends Fragment {
 
 //                HashMap<String, Object> totalExp = new HashMap<>();
 //                totalExp.put("totalExpense", "00");
-                FirebaseDatabase.getInstance().getReference().child("eventlist").child(eventID).child("totalExpense").setValue("0");
+                FirebaseDatabase.getInstance().getReference("UserData").child(currentUser).child("Eventlist").child(eventID).child("totalExpense").setValue("0");
                 // clear edit text
                 mTourName.setText("");
                 mTourLocation.setText("");
